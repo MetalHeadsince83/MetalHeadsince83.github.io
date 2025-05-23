@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Draw with Circles</title>
+  <style>
+    canvas {
+      border: 2px solid #000;
+      display: block;
+      margin: 20px auto;
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+<h1>Welcome to free draw</h1>
+<p>Do whatever the hell you want here, go crazy!</p>
+<canvas id="circleCanvas" width="800" height="500"></canvas>
+ 
+<script>
+  const canvas = document.getElementById("circleCanvas");
+  const ctx = canvas.getContext("2d");
+ 
+  let drawing = false;
+ 
+  canvas.addEventListener("mousedown", () => drawing = true);
+  canvas.addEventListener("mouseup", () => drawing = false);
+  canvas.addEventListener("mouseleave", () => drawing = false);
+ 
+  canvas.addEventListener("mousemove", drawCircle);
+ 
+  function drawCircle(e) {
+    if (!drawing) return;
+ 
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+ 
+    ctx.beginPath();
+    ctx.arc(x, y, 8, 0, Math.PI * 2); // Change 8 to your preferred circle radius
+    ctx.fillStyle = "#0077ff"; // Change this to any color you like
+    ctx.fill();
+    ctx.closePath();
+  }
+</script>
+
+</body>
+</html>
